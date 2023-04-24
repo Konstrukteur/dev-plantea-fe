@@ -12,7 +12,7 @@ const Layout = () => {
 
         <div className='content'>Delicious</div>
       </h1>
-      <NavMenu />
+      {/* <NavMenu /> */}
 
       <Outlet />
     </>
