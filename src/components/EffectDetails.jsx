@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const Plant = () => {
+const EffectDetails = () => {
   const title = useParams();
-  const [plant, setPlant] = useState();
+  const [effect, setEffect] = useState();
   // const secretFragment = `?key=${process.env.REACT_APP_PERENIAL_KEY}`;
   const baseUrl = "https://plantea.aladlabs.net/api/v1/species/";
   // const baseUrl = "http://10.0.1.22:8000/api/v1/species/";
@@ -14,7 +14,7 @@ const Plant = () => {
     try {
       const response = await fetch(apiUrl);
       const json = await response.json();
-      setPlant(json);
+      setEffect(json);
     } catch (error) {
       console.log(error.message);
     }
@@ -27,18 +27,14 @@ const Plant = () => {
   return (
     <div className=''>
       <div>
-        {plant ? (
+        {effect ? (
           <>
-            <img src={plant && `https://${plant.image_2}`} />
+            <img src={effect && `https://${effect.image}`} />
             <table>
               <tbody>
                 <tr>
-                  <td>Common name</td>
-                  <td>{plant.name}</td>
-                </tr>
-                <tr>
-                  <td>Scientific name</td>
-                  <td>{plant.latin_name}</td>
+                  <td>Name</td>
+                  <td>{effect.name}</td>
                 </tr>
               </tbody>
             </table>
@@ -51,4 +47,4 @@ const Plant = () => {
   );
 };
 
-export default Plant;
+export default EffectDetails;

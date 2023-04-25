@@ -7,7 +7,7 @@ const NavMenu = () => {
         <NavLink to='/'>Home </NavLink>
         <NavLink to='/plants'>Plants </NavLink>
         <NavLink to='/recipes'>Recipes </NavLink>
-        <NavLink to='/bodies'>Bodies </NavLink>
+        <NavLink to='/effects'>Effects </NavLink>
       </ul>
     </nav>
   );
