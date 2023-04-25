@@ -47,8 +47,8 @@ const Plants = () => {
       <div>
         {plants
           ? plants.map((plant) => {
-              return <PlantTile plant={plant} key={plant.latin_name} />;
-            })
+            return <PlantTile plant={plant} key={plant.latin_name} />;
+          })
           : "loading..."}
       </div>
       {/* <Pagination
