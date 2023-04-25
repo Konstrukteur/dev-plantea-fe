@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 // import AuthState from "./contexts/AuthContext";
 import Sidebar from "./components/Sidebar";
-import MenuBar from "./components/MenuBar";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Plants from "./components/Plants";
@@ -21,7 +20,6 @@ const App = () => {
       <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
       <div id="page-wrap">
         {/* <AuthState> */}
-        <MenuBar />        
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />

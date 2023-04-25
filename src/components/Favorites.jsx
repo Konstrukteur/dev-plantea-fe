@@ -1,8 +1,11 @@
 import { useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 
 const Favorites = () => {
+  const { pageTitle, setPageTitle } = useOutletContext();
+
   useEffect(() => {
-    console.log("Hello from Favorites!");   
+    setPageTitle("Favorites");   
   }, []);
 
   return (

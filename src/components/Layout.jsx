@@ -1,20 +1,20 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import BackButton from "./BackButton";
 // import useAuth from "../hooks/useAuth";
-import NavMenu from "./NavMenu";
 
 const Layout = () => {
+  const [pageTitle, setPageTitle] = useState("")
   //   const { isAuthenticated, signOutUser, loginUser } = useAuth();
 
   return (
     <>
-      <h1 className='ui header'>
-        <i className='icon settings' />
+      <div className='topContainer'>
+        <div><BackButton /></div>
+        <div><h3>{pageTitle}</h3></div>
+      </div>
 
-        <div className='content'>Delicious</div>
-      </h1>
-      {/* <NavMenu /> */}
-
-      <Outlet />
+      <Outlet context={{ pageTitle, setPageTitle }}/>
     </>
   );
 };

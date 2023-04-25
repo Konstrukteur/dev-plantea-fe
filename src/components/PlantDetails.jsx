@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext , useParams } from "react-router-dom";
 
 const PlantDetails = () => {
+  const { pageTitle, setPageTitle } = useOutletContext();
   const title = useParams();
   const [plant, setPlant] = useState();
   // const secretFragment = `?key=${process.env.REACT_APP_PERENIAL_KEY}`;
@@ -9,6 +10,12 @@ const PlantDetails = () => {
   // const baseUrl = "http://10.0.1.22:8000/api/v1/species/";
   const initialUrl = baseUrl + title.id;
   const [apiUrl, setApiUrl] = useState(initialUrl);
+
+  useEffect(() => {
+    // todo: update with title of plant
+    setPageTitle("Plant Details");
+    getData();
+  }, [apiUrl]);
 
   const getData = async () => {
     try {
@@ -19,10 +26,6 @@ const PlantDetails = () => {
       console.log(error.message);
     }
   };
-
-  useEffect(() => {
-    getData();
-  }, [apiUrl]);
 
   return (
     <div className=''>
