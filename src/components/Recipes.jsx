@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import PlantTile from "./PlantTile.jsx";
 import Pagination from "./Pagination";
 
 const Recipes = () => {
+  const { pageTitle, setPageTitle } = useOutletContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [recipes, setRecipes] = useState();
@@ -12,6 +14,16 @@ const Recipes = () => {
   const baseUrl = "https://plantea.aladlabs.net/api/v1/recipes";
   const initialUrl = baseUrl; // + pageFragment + secretFragment;
   const [apiUrl, setApiUrl] = useState(initialUrl);
+
+  useEffect(() => {
+    setPageTitle("Recipes"); 
+    getData();
+  }, []);
+
+    // useEffect(() => {
+  //   console.log(currentPage);
+  //   setApiUrl(`localhost:8000/api/v1/recipes`);
+  // }, [currentPage]);
 
   const getData = async () => {
     try {
@@ -26,16 +38,6 @@ const Recipes = () => {
       console.log(error.message);
     }
   };
-
-  // useEffect(() => {
-  //   console.log(currentPage);
-  //   setApiUrl(`localhost:8000/api/v1/recipes`);
-  // }, [currentPage]);
-
-  useEffect(() => {
-    console.log("Hello World!");
-    getData();
-  }, []);
 
   return (
     <div className=''>
