@@ -9,6 +9,7 @@ import Recipes from "./components/Recipes";
 import RecipeDetails from "./components/RecipeDetails";
 import Effects from "./components/Effects";
 import EffectDetails from "./components/EffectDetails";
+import Favorites from "./components/Favorites";
 import "./stylesheets/App.css";
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/plants" element={<Plants />} />
-            <Route path="/plants/:id" element={<Plant />} />
+            <Route path="/plants/:id" element={<PlantDetails />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
             <Route path="/effects" element={<Effects />} />
