@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState } from "react";
-import { slide as Menu } from 'react-burger-menu';
 import { NavLink } from "react-router-dom";
+import { slide as Menu } from 'react-burger-menu';
+import SearchBar from './SearchBar';
 import '../stylesheets/Sidebar.css';
 
-export default Sidebar => {
+const Sidebar = () => {
     const [menuState, setMenuState] = useState(false);
 
     // This keeps your state in sync with the opening/closing of the menu
@@ -23,11 +24,16 @@ export default Sidebar => {
             isOpen={ menuState.menuOpen }
             onStateChange={(menuState) => handleStateChange(menuState)}
         >
-            <NavLink to='/' onClick={() => closeMenu()}>Home </NavLink>
-            <NavLink to='/plants' onClick={() => closeMenu()}>Plants </NavLink>
-            <NavLink to='/recipes' onClick={() => closeMenu()}>Recipes </NavLink>
-            <NavLink to='/bodies' onClick={() => closeMenu()}>Bodies </NavLink>
-            <NavLink to='/favorites' onClick={() => closeMenu()}>Favorites </NavLink>
+            {/* put location pin instead of text */}
+            <NavLink to='/location' onClick={() => closeMenu()}>Location</NavLink>
+            <SearchBar />
+            <NavLink to='/' onClick={() => closeMenu()}>Home</NavLink>
+            <NavLink to='/recipes' onClick={() => closeMenu()}>Recipes</NavLink>
+            <NavLink to='/plants' onClick={() => closeMenu()}>Plants</NavLink>
+            <NavLink to='/effects' onClick={() => closeMenu()}>Effects</NavLink>
+            <NavLink to='/favorites' onClick={() => closeMenu()}>Favorites</NavLink>
         </Menu>
     );
 };
+
+export default Sidebar;
