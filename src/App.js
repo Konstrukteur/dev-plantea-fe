@@ -16,31 +16,35 @@ import "./stylesheets/App.css";
 
 const App = () => {
   return (
-    <div className="App" id="outer-container">
-      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
-      <div id="page-wrap">
-        {/* <AuthState> */}
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/recipes" element={<Recipes />} />
-            <Route path="/recipes/:id" element={<RecipeDetails />} />
-            <Route path="/plants" element={<Plants />} />
-            <Route path="/plants/:id" element={<PlantDetails />} />
-            <Route path="/effects" element={<Effects />} />
-            <Route path="/effects/:id" element={<EffectDetails />} />          
-            <Route path="/location" element={<Location />} />
-            {/* ToDo: Favorites will be a protected route */}
-            <Route path="/favorites" element={<Favorites />} />
-            {/* <Route path='/signin' element={<Signin />} />
+    <div className="App container-md" id="outer-container">
+      <div className="row">
+        <div className="col">
+          <Sidebar pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
+          <div id="page-wrap">
+            {/* <AuthState> */}
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/recipes" element={<Recipes />} />
+                <Route path="/recipes/:id" element={<RecipeDetails />} />
+                <Route path="/plants" element={<Plants />} />
+                <Route path="/plants/:id" element={<PlantDetails />} />
+                <Route path="/effects" element={<Effects />} />
+                <Route path="/effects/:id" element={<EffectDetails />} />
+                <Route path="/location" element={<Location />} />
+                {/* ToDo: Favorites will be a protected route */}
+                <Route path="/favorites" element={<Favorites />} />
+                {/* <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/me' element={<Me />} />
         </Route> */}
-          </Route>
-        </Routes>
-        {/* </AuthState> */}
-        <Footer />
+              </Route>
+            </Routes>
+            {/* </AuthState> */}
+            <Footer />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import PlantTile from "./PlantTile.jsx";
+import { Link, useOutletContext } from "react-router-dom";
 import Pagination from "./Pagination";
 
 const Recipes = () => {
@@ -16,11 +15,11 @@ const Recipes = () => {
   const [apiUrl, setApiUrl] = useState(initialUrl);
 
   useEffect(() => {
-    setPageTitle("Recipes"); 
+    setPageTitle("Recipes");
     getData();
   }, []);
 
-    // useEffect(() => {
+  // useEffect(() => {
   //   console.log(currentPage);
   //   setApiUrl(`localhost:8000/api/v1/recipes`);
   // }, [currentPage]);
@@ -28,9 +27,9 @@ const Recipes = () => {
   const getData = async () => {
     try {
       const response = await fetch(apiUrl);
-      console.log(response);
+      //console.log(response);
       const json = await response.json();
-      console.log(json);
+      //console.log(json);
       // console.log(json.data);
       // setTotalPages(json.last_page);
       setRecipes(json.data);
@@ -48,9 +47,11 @@ const Recipes = () => {
       /> */}
       <div>
         {recipes
-          ? recipes.map((recipe) => {
-            return <PlantTile plant={recipe} key={recipe.latin_name} />;
-          })
+          ? recipes.map((recipe) => (
+            <div>             
+              <Link className="link" to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+            </div>            
+          ))
           : "loading..."}
       </div>
       {/* <Pagination

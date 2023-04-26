@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
+import ListItem from "./ListItem.jsx";
 import PlantTile from "./PlantTile.jsx";
 import Pagination from "./Pagination";
 
@@ -16,7 +17,7 @@ const Plants = () => {
   const [apiUrl, setApiUrl] = useState(initialUrl);
 
   useEffect(() => {
-    setPageTitle("Plants"); 
+    setPageTitle("Plants");
     getData();
   }, []);
 
@@ -48,11 +49,20 @@ const Plants = () => {
       /> */}
       <div>
         {plants
-          ? plants.map((plant) => {
-            return <PlantTile plant={plant} key={plant.latin_name} />;
-          })
+          ? plants.map((plant) => (
+              <div>
+                {/* ToDo: pass image as parameter when available */}
+                <ListItem key={plant.id} id={plant.id} title={plant.common_name} subtitle={plant.binominal_name}></ListItem>
+              </div>
+            // <div>
+            //   <Link className="link" to={`/plants/${plant.id}`}>{plant.common_name}</Link>
+            //   <div>{plant.binominal_name}</div>
+            // </div>
+            // return <PlantTile plant={plant} key={plant.binominal_name} />;
+          ))
           : "loading..."}
       </div>
+
       {/* <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

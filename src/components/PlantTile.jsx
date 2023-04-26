@@ -20,7 +20,7 @@ const PlantTile = ({ plant }) => {
           </tr>
           <tr>
             <td>Scientific Name</td>
-            <td>{plant.scientific_name}</td>
+            <td>{plant.binominal_name}</td>
           </tr>
           <tr>
             <td>Cycle</td>
