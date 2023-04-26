@@ -16,3 +16,10 @@
   /* center on cross-axis, i.e. vertically */
   align-self: center;
 }
+
+.itemContainer {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  padding: 0.6em;
+}

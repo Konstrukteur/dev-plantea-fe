@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import PlantTile from "./PlantTile.jsx";
+import { Link, useOutletContext } from "react-router-dom";
 import Pagination from "./Pagination.jsx";
 
 const Effects = () => {
@@ -16,11 +15,11 @@ const Effects = () => {
   const [apiUrl, setApiUrl] = useState(initialUrl);
 
   useEffect(() => {
-    setPageTitle("Effects");    
+    setPageTitle("Effects");
     getData();
   }, []);
 
-    // useEffect(() => {
+  // useEffect(() => {
   //   console.log(currentPage);
   //   setApiUrl(`localhost:8000/api/v1/species`);
   // }, [currentPage]);
@@ -48,9 +47,12 @@ const Effects = () => {
       /> */}
       <div>
         {effects
-          ? effects.map((effect) => {
-            return <PlantTile plant={effect} key={effect.latin_name} />;
-          })
+          ? effects.map((effect) => (
+            <div>
+              <Link className="link" to={`/effects/${effect.id}`}>{effect.name}</Link>
+              <div>{effect.description}</div>
+            </div>
+          ))
           : "loading..."}
       </div>
       {/* <Pagination
