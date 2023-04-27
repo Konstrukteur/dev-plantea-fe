@@ -23,3 +23,9 @@
   text-align: left;
   padding: 0.6em;
 }
+
+/* essential for map to be displayed! */
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
