@@ -4,14 +4,15 @@ import ToggleSwitch from "../controls/ToggleSwitch.jsx";
 import Map from "./Map.jsx";
 import utils from "../services/utils.jsx";
 
-// default: location is set automatically, i.e. retrieved from IP --> long, lat --> show in leaflet map
-// switch to manual: leaflet map shows with top/bottom (=north/south) sections selectable to set hemisphere
+// default: location is set automatically, i.e. retrieved from IP --> long, lat --> displayed in leaflet map
+// switch to manual: static leaflet world map shows with top/bottom (=north/south) sections selectable to set hemisphere
 
 const Location = () => {
   const { pageTitle, setPageTitle } = useOutletContext();
   const [loading, setLoading] = useState(true);
   const [automatic, setAutomatic] = useState(true);
   const [ipAddress, setIpAddress] = useState();
+  const [selectedHemisphere, setSelectedHemisphere] = useState("");
   const { getMyIp } = utils();
 
   useEffect(() => {
@@ -19,13 +20,21 @@ const Location = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Auto: " + automatic)
     if (automatic) {
-      setLoading(true);
-      getMyIp().then(data => {
-        setIpAddress(data);
-        setLoading(false);
-      });
+      try {
+        setLoading(true);
+        getMyIp().then(data => {
+          setIpAddress(data);
+          setSelectedHemisphere(data.latitude < 0 ? "southern" : "northern");
+          setLoading(false);
+        });
+      } catch (error) {
+        // automatic is set, but IP cannot be retrieved -> switch to manual
+        console.log(error);
+        setAutomatic(false);
+      }
+    } else {
+      setSelectedHemisphere("");
     }
   }, [automatic]);
 
@@ -37,7 +46,7 @@ const Location = () => {
     <>
       <div className='d-flex justify-content-between mx-4 my-3'>
         <div>Set location</div>
-        <ToggleSwitch textOn="Automatic" textOff="Manual" onChange={handleToggleChange} />
+        <ToggleSwitch textOn="Automatic" textOff="Manual" isOn={automatic} setIsOn={setAutomatic} onChange={handleToggleChange} />
       </div>
       {
         automatic ?
@@ -51,13 +60,15 @@ const Location = () => {
                 </div>
               ) : (
                 <div>
-                  <Map lng={ipAddress.longitude} lat={ipAddress.latitude} zoom={13} />
+                  <div>Your location is set to {ipAddress.city} in {ipAddress.country_name}.</div>
+                  <div>This belongs to the <em>{selectedHemisphere}</em> hemisphere.</div>
+                  <Map lng={ipAddress.longitude} lat={ipAddress.latitude} zoom={8} />
                 </div>
               )
           ) : (
             <div>
-              Please select hemisphere in the map!
-              <Map lng={0} lat={0} zoom={2} />
+              {!selectedHemisphere ? <div>Please select hemisphere in the map!</div> : <div>You selected the <em>{selectedHemisphere}</em> hemisphere</div>}
+              <Map lng={0} lat={0} zoom={2} selectedHemi={selectedHemisphere} setSelectedHemi={setSelectedHemisphere} />
             </div>
           )
       }

@@ -27,5 +27,5 @@
 /* essential for map to be displayed! */
 .leaflet-container {
   width: 100%;
-  height: 100vh;
+  height: 70vh;
 }
