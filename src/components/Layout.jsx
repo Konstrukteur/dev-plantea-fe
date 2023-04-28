@@ -9,9 +9,9 @@ const Layout = () => {
 
   return (
     <>
-      <div className='topContainer'>
+      <div className='topContainer d-flex align-items-center'>
         <div><BackButton /></div>
-        <div><h3>{pageTitle}</h3></div>
+        <div className="pt-1"><h3>{pageTitle}</h3></div>
       </div>
 
       <Outlet context={{ pageTitle, setPageTitle }}/>

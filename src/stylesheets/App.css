@@ -8,20 +8,21 @@
   flex-direction: row;
 }
 
-.topContainer div {
-  margin: 0 1.2em;
-}
-
-.topContainer div:nth-child(1) {
-  /* center on cross-axis, i.e. vertically */
-  align-self: center;
-}
-
 .itemContainer {
   display: flex;
   flex-direction: row;
   text-align: left;
   padding: 0.6em;
+}
+
+.backButton {
+  height: 40px;
+
+}
+
+.backButton img {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 /* essential for map to be displayed! */
