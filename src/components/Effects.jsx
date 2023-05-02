@@ -1,42 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import Pagination from "./Pagination.jsx";
+import ListItem from "./ListItem.jsx";
+import utils from "../services/utils.jsx";
 
 const Effects = () => {
   const { pageTitle, setPageTitle } = useOutletContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [effects, setEffects] = useState();
-  // const secretFragment = `&key=${process.env.REACT_APP_PERENIAL_KEY}`;
-  // const pageFragment = `?page=${currentPage}`;
-  // const baseUrl = "http://10.0.1.22:8000/api/v1/effects";
-  const baseUrl = "https://plantea.aladlabs.net/api/v1/effects";
-  const initialUrl = baseUrl; // + pageFragment + secretFragment;
-  const [apiUrl, setApiUrl] = useState(initialUrl);
+  const [effects, setEffects] = useState(); 
+  const { getEffects } = utils();
 
   useEffect(() => {
     setPageTitle("Effects");
-    getData();
+    getEffects().then(effects => setEffects(effects));   
   }, []);
-
-  // useEffect(() => {
-  //   console.log(currentPage);
-  //   setApiUrl(`localhost:8000/api/v1/species`);
-  // }, [currentPage]);
-
-  const getData = async () => {
-    try {
-      const response = await fetch(apiUrl);
-      console.log(response);
-      const json = await response.json();
-      console.log(json);
-      // console.log(json.data);
-      // setTotalPages(json.last_page);
-      setEffects(json.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   return (
     <div className=''>
@@ -49,8 +27,8 @@ const Effects = () => {
         {effects
           ? effects.map((effect) => (
             <div>
-              <Link className="link" to={`/effects/${effect.id}`}>{effect.name}</Link>
-              <div>{effect.description}</div>
+              <ListItem key={effect.id} id={effect.id} title={effect.name} />
+              <div className="item">{effect.description}</div>
             </div>
           ))
           : "loading..."}
