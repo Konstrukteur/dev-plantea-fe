@@ -1,33 +1,21 @@
 import { useState, useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
-import PlantItem from "./PlantItem";
+import PlantItem from "./PlantItem.jsx";
+import utils from "../services/utils.jsx";
 
 const PlantDetails = () => {
-    const { pageTitle, setPageTitle } = useOutletContext();
-    const title = useParams();
-    const [plant, setPlant] = useState();
-    // const secretFragment = `?key=${process.env.REACT_APP_PERENIAL_KEY}`;
-    const baseUrl = "https://plantea.aladlabs.net/api/v1/species/";
-    // const baseUrl = "http://10.0.1.22:8000/api/v1/species/";
-    const initialUrl = baseUrl + title.id;
-    const [apiUrl, setApiUrl] = useState(initialUrl);
+  const { pageTitle, setPageTitle } = useOutletContext();
+  const { id } = useParams();
+  const [plant, setPlant] = useState();
+  const { getSinglePlant } = utils();
 
-    useEffect(() => {
-        // todo: update with title of plant
-        setPageTitle("Plant Details");
-        getData();
-    }, [apiUrl]);
+  useEffect(() => {    
+    getSinglePlant(id).then(plant => {
+      setPlant(plant);
+      setPageTitle(plant.common_name);
+    });
 
-    const getData = async () => {
-        try {
-           // console.log(initialUrl)
-            const response = await fetch(apiUrl);
-            const json = await response.json();
-            setPlant(json);
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
+  }, [id]);
 
     return (
         <div className=''>

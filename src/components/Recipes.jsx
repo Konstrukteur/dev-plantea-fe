@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import ListItem from "./ListItem";
+import utils from "../services/utils.jsx";
 import Pagination from "./Pagination";
 
 const Recipes = () => {
@@ -8,36 +9,12 @@ const Recipes = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [recipes, setRecipes] = useState();
-  // const secretFragment = `&key=${process.env.REACT_APP_PERENIAL_KEY}`;
-  // const pageFragment = `?page=${currentPage}`;
-  // const baseUrl = "http://10.0.1.22:8000/api/v1/recipes";
-  const baseUrl = "https://plantea.aladlabs.net/api/v1/recipes";
-  const initialUrl = baseUrl; // + pageFragment + secretFragment;
-  const [apiUrl, setApiUrl] = useState(initialUrl);
+  const { getRecipes } = utils();
 
   useEffect(() => {
     setPageTitle("Recipes");
-    getData();
+    getRecipes().then( recipes => setRecipes(recipes));
   }, []);
-
-  // useEffect(() => {
-  //   console.log(currentPage);
-  //   setApiUrl(`localhost:8000/api/v1/recipes`);
-  // }, [currentPage]);
-
-  const getData = async () => {
-    try {
-      const response = await fetch(apiUrl);
-      //console.log(response);
-      const json = await response.json();
-      //console.log(json);
-      // console.log(json.data);
-      // setTotalPages(json.last_page);
-      setRecipes(json.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   return (
     <div className=''>
@@ -50,10 +27,8 @@ const Recipes = () => {
         {recipes
           ? recipes.map((recipe) => (
             <div>        
-                <ListItem key={recipe.id}  id={recipe.id} title={recipe.name}/>   
-            </div>      
-                //<Link className="link" to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-      
+                <ListItem key={recipe.id} id={recipe.id} title={recipe.name}/>   
+            </div>                      
           ))
           : "loading..."}
       </div>
