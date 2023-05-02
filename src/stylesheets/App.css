@@ -36,6 +36,11 @@
     height: 50px; 
 }
 
+.recipeImg {
+    width: 20em;
+    height: 20em;   
+}
+
 .item {
   display: flex;
   flex-direction: column;
