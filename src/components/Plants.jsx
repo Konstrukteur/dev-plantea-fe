@@ -12,7 +12,7 @@ const Plants = () => {
   // const secretFragment = `&key=${process.env.REACT_APP_PERENIAL_KEY}`;
   // const pageFragment = `?page=${currentPage}`;
   // const baseUrl = "http://10.0.1.22:8000/api/v1/species";
-  const baseUrl = "https://plantea.aladlabs.net/api/v1/species";
+  const baseUrl = "https://plantea.aladlabs.net/api/v1/species/harvesting/n";
   const initialUrl = baseUrl; // + pageFragment + secretFragment;
   const [apiUrl, setApiUrl] = useState(initialUrl);
 
@@ -52,7 +52,7 @@ const Plants = () => {
           ? plants.map((plant) => (
               <div>
                 {/* ToDo: pass image as parameter when available */}
-                <ListItem key={plant.id} id={plant.id} title={plant.common_name} subtitle={plant.binominal_name}></ListItem>
+            <ListItem key={plant.species_id} id={plant.species_id} title={plant.common_name} subtitle={plant.binominal_name} filename={plant.filename} image_id={plant.image_id}></ListItem>
               </div>
             // <div>
             //   <Link className="link" to={`/plants/${plant.id}`}>{plant.common_name}</Link>

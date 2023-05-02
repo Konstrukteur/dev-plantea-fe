@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import Pagination from "./Pagination.jsx";
+import ListItem from "./ListItem.jsx";
 
 const Effects = () => {
   const { pageTitle, setPageTitle } = useOutletContext();
@@ -49,9 +50,11 @@ const Effects = () => {
         {effects
           ? effects.map((effect) => (
             <div>
-              <Link className="link" to={`/effects/${effect.id}`}>{effect.name}</Link>
-              <div>{effect.description}</div>
+                <ListItem key={effect.id} id={effect.id} title={effect.name}/>
+              <div className="item">{effect.description}</div>
             </div>
+                 //<Link className="link" to={`/effects/${effect.id}`}>{effect.name}</Link>
+
           ))
           : "loading..."}
       </div>

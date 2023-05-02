@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
+import EffectsItem from "./EffectsItem";
 
 const EffectDetails = () => {
   const { pageTitle, setPageTitle } = useOutletContext();
@@ -31,17 +32,9 @@ const EffectDetails = () => {
     <div className=''>
       <div>
         {effect ? (
-          <>
-            <img src={effect && `https://${effect.image}`} />
-            <table>
-              <tbody>
-                <tr>
-                  <td>Name</td>
-                  <td>{effect.name}</td>
-                </tr>
-              </tbody>
-            </table>
-          </>
+          <div>
+            <EffectsItem key={effect.id} id={effect.id} name={effect.name} common_name={effect.common_name} binominal_name={effect.binominal_name} habitat={effect.habitat}/>
+          </div>
         ) : (
           "loading"
         )}

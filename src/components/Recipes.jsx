@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
+import ListItem from "./ListItem";
 import Pagination from "./Pagination";
 
 const Recipes = () => {
@@ -48,9 +49,11 @@ const Recipes = () => {
       <div>
         {recipes
           ? recipes.map((recipe) => (
-            <div>             
-              <Link className="link" to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-            </div>            
+            <div>        
+                <ListItem key={recipe.id}  id={recipe.id} title={recipe.name}/>   
+            </div>      
+                //<Link className="link" to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+      
           ))
           : "loading..."}
       </div>
