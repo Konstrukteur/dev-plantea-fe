@@ -8,6 +8,13 @@
   flex-direction: row;
 }
 
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0.6em;
+}
+
 .itemContainer {
   display: flex;
   flex-direction: row;
