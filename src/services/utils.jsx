@@ -30,28 +30,31 @@ const utils = () => {
         }
     }
 
-    // returns all plants that are available in the current season (default) and specified area
-    const getPlants = async (hemisphere = "n") => {
+    // gets all plants that are available in the current season (default) and specified area
+    const getPlants = async (hemisphere) => {        
         const url = PLANTS_BASEURL + HARVEST + getHemisphere(hemisphere);
         return getAllData(url);
     };
 
-    const getPlantsPerPage = async (pageNo = 1, pageSize = 10, hemisphere = "n") => {
+    // gets all plants that are available in the current season (default) and specified area - per page
+    const getPlantsPerPage = async (pageNo = 1, pageSize = 10, hemisphere) => {       
         const url = PLANTS_BASEURL + HARVEST + getHemisphere(hemisphere);
-        const query = `?page=${pageNo}&pageSize=${pageSize}`;
-        console.log(url + query)
+        const query = `?page=${pageNo}&pageSize=${pageSize}`;               
         return getAllData(url + query);
     };
 
-    const getBlossomingPlants = async (hemisphere = "n") => {
+    // gets all plants that are blossoming in the current season (default) and specified area
+    const getBlossomingPlants = async (hemisphere) => {        
         const url = PLANTS_BASEURL + BLOSSOM + getHemisphere(hemisphere);
         return getAllData(url);
     };
 
+    // gets plant with specified id
     const getSinglePlant = async (id) => {
         return getSingleData(PLANTS_BASEURL, id);
     };
 
+    // gets plant with specified name
     const getSinglePlantByName = async (name) => {
         return getByName(PLANTS_BASEURL, name);
     };
@@ -109,8 +112,15 @@ const utils = () => {
     // -------------------- private helper functions -------------------------
 
     // returns URL snippet for selected hemisphere ("north or south")
-    const getHemisphere = (hemi) => {       
-        return hemi.toLowerCase() === "n" || "north" ? NORTHERNHEMISPHERE : SOUTHERNHEMISPHERE;
+    const getHemisphere = (hemi) => {             
+        // sanity check:
+        if (!hemi)
+            throw new Error("Please select hemisphere! - " + hemi);
+        if (!(hemi.toLowerCase() === "n" || hemi.toLowerCase() === "north" || hemi.toLowerCase() === "northern"
+        || hemi.toLowerCase() === "s" || hemi.toLowerCase() === "south" || hemi.toLowerCase() === "southern"))
+            throw new Error("Invalid hemisphere! - " + hemi);      
+
+        return (hemi.toLowerCase() === "n" || hemi.toLowerCase() === "north" || hemi.toLowerCase() === "northern") ? NORTHERNHEMISPHERE : SOUTHERNHEMISPHERE;
     }
 
     // returns all plants/effects for the specified URL

@@ -9,10 +9,10 @@ import utils from "../services/utils.jsx";
 
 const Location = () => {
   const { pageTitle, setPageTitle } = useOutletContext();
+  const { selectedHemisphere, setSelectedHemisphere } = useOutletContext();
   const [loading, setLoading] = useState(true);
   const [automatic, setAutomatic] = useState(true);
-  const [ipAddress, setIpAddress] = useState();
-  const [selectedHemisphere, setSelectedHemisphere] = useState("");
+  const [ipAddress, setIpAddress] = useState();  
   const { getMyIp } = utils();
 
   useEffect(() => {
@@ -25,8 +25,8 @@ const Location = () => {
         setLoading(true);
         getMyIp().then(data => {
           setIpAddress(data);
-          setSelectedHemisphere(data.latitude < 0 ? "southern" : "northern");
-          setLoading(false);
+          setSelectedHemisphere(data.latitude < 0 ? "southern" : "northern");          
+          setLoading(false);                    
         });
       } catch (error) {
         // automatic is set, but IP cannot be retrieved -> switch to manual

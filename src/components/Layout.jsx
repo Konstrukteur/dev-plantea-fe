@@ -4,7 +4,10 @@ import BackButton from "./BackButton";
 // import useAuth from "../hooks/useAuth";
 
 const Layout = () => {
-  const [pageTitle, setPageTitle] = useState("")
+  // pageTitle is needed in every component page
+  const [pageTitle, setPageTitle] = useState("");
+  // hemisphere is needed in Location and Plants component
+  const [selectedHemisphere, setSelectedHemisphere] = useState("");
   //   const { isAuthenticated, signOutUser, loginUser } = useAuth();
 
   return (
@@ -14,7 +17,7 @@ const Layout = () => {
         <div className="pt-1"><h3>{pageTitle}</h3></div>
       </div>
 
-      <Outlet context={{ pageTitle, setPageTitle }}/>
+      <Outlet context={{ pageTitle, setPageTitle, selectedHemisphere, setSelectedHemisphere }}/>
     </>
   );
 };
