@@ -27,7 +27,7 @@ const Recipes = () => {
         {recipes
           ? recipes.map((recipe) => (
             <div>        
-                <ListItem key={recipe.id} id={recipe.id} title={recipe.name}/>   
+                <ListItem key={recipe.idMeal} id={recipe.idMeal} title={recipe.strMeal} image_id={recipe.strMealThumb}/>   
             </div>                      
           ))
           : "loading..."}

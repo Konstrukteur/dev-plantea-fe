@@ -1,52 +1,28 @@
 import React from "react";
 import "../stylesheets/App.css"
 
+const RecipeItem = ({ idMeal, strMealThumb, ingredientsArray, strInstructions }) => {
+    const myIngr = ingredientsArray;
+    const myIngrList = myIngr.map((str, i) => <li key={i}>{str}</li>);
+    const myInstructions = strInstructions;
+    const myInstArray = myInstructions.split('.');
+    const myInstList = myInstArray.map((step, index) => {
+        const trimmedStep = step.trim();
+        return trimmedStep ? <li key={index}>{trimmedStep}</li> : null;
+    });
 
-const RecipeItem = ({ id, imgUrl, name, ingredientLines, portions, prep_time, cook_time, instructions }) => {
-    const myInstructions = instructions;
-    const myInstArray = myInstructions.split(/\d+.\s+/);
-    const myInstList = myInstArray.map((step, index) => <li key={index}>{step}</li>);
-  
     return (
-      <div key={id} className="item">
-        <h4>{name}</h4>
-        <div>
-          <img src={imgUrl ? `https://${imgUrl}` : "https://via.placeholder.com/50"} alt="" />
+        <div key={idMeal} className="item">
+            <div>
+                <img className="recipeImg"
+                    src={strMealThumb}
+                    alt=""
+                />
+            </div>
+            <ol>{myIngrList}</ol>
+            <ol>{myInstList}</ol>
         </div>
-        <p>Portions {portions}{/* {} */}</p>
-        <p>Preparation time {prep_time}{/* {} */}</p>
-        <p>Cook time {cook_time}{/* {} */}</p>
-        <ul>{ingredientLines}{/* {} */}</ul>
-        <h4>Instructions</h4>
-        <ol>{myInstList}</ol>
-      </div>
     );
-  };
-  
-  export default RecipeItem; 
-  
-
-  /* const RecipeItem = ({id, imgUrl, name, ingredientLines, portions, prep_time, cook_time, instructions}) => {
-const myInstructions = instructions;
-  const myInstArray = myInstructions.split("\\n\\n");
-  const myInstList = myInstArray.map((step, index) => <li key={index}>{step}</li>);
-  
-
-  return (
-    <div key={id} className="item">
-      <h4>{name}</h4>
-      <div>
-        <img src={imgUrl ? `https://${imgUrl}` : "https://via.placeholder.com/50"} alt="" />
-      </div>
-      <p>Portions {portions}</p>
-      <p>Preparation time {prep_time}</p>
-      <p>Cook time {cook_time}</p>
-      <ul>{ingredientLines}</ul>
-      <h4>Instructions</h4>
-      <ul>{myInstList}</ul>
- 
-    </div>
-  );
 };
 
-export default RecipeItem; */
+export default RecipeItem;
