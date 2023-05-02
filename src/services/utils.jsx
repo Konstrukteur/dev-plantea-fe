@@ -1,3 +1,5 @@
+import { element } from "prop-types";
+
 const utils = () => {
 
     // Find API description for getting user IP here:
@@ -5,9 +7,14 @@ const utils = () => {
     const IP_URL = "https://ipapi.co/json/";
     const BASEURL = "https://plantea.aladlabs.net/api/v1/";
     const PLANTS_BASEURL = BASEURL + "species/";
-    const PLANTS_HARVESTNORTH = PLANTS_BASEURL + "harvesting/n/";
-    const RECIPES_BASEURL = BASEURL + "recipes/";
-    const EFFECTS_BASEURL = BASEURL + "effects/";
+    const PLANTS_HARVESTNORTH = PLANTS_BASEURL + "harvesting/n/";    
+    // use recipes from public API:
+    const RECIPES_BASEURL = BASEURL + "apirecipes/";
+    // use recipes from own DB:
+    //const RECIPES_BASEURL = BASEURL + "recipes/";
+    const EFFECTS_BASEURL = BASEURL + "effects/";   
+    const GETBYNAME = "get-by-name/";
+    const GETBYINGREDIENT = "get-by-ingredient/";
 
     // retrieve location for your IP address formatted as JSON
     const getMyIp = async () => {
@@ -29,12 +36,23 @@ const utils = () => {
         return getSingleData(PLANTS_BASEURL, id);
     };
 
-    const getRecipes = async () => {
-        return getAllData(RECIPES_BASEURL);
+    const getSinglePlantByName = async (name) => {
+        return getByName(PLANTS_BASEURL, name);
     };
+
+    const getRecipes = async () => {     
+        // !!! fake recipe list for now with ingredient-based recipes
+        return getRecipesByIngredient("tomato")
+        // todo - update when available from BE
+        //return getAllData(RECIPES_BASEURL);
+    };    
 
     const getSingleRecipe = async (id) => {
         return getSingleData(RECIPES_BASEURL, id);       
+    };
+
+    const getSingleRecipeByName = async (name) => {
+        return getByName(RECIPES_BASEURL, name);       
     };
 
     const getEffects = async () => {
@@ -45,6 +63,11 @@ const utils = () => {
         return getSingleData(EFFECTS_BASEURL, id);        
     };
 
+    const getSingleEffectByName = async (name) => {
+        return getByName(EFFECTS_BASEURL, name);        
+    };
+
+    // returns all plants/effects for the specified URL
     const getAllData = async (baseUrl) => {
         try {
             const response = await fetch(baseUrl);
@@ -55,6 +78,19 @@ const utils = () => {
         }
     }
 
+    // returns all recipes for the specified ingredient
+    const getRecipesByIngredient = async (ingredient) => {      
+        try {
+            const response = await fetch(RECIPES_BASEURL + GETBYINGREDIENT + ingredient);
+            const json = await response.json();                    
+            const recipes = json.map(element => element[0])          
+            return recipes;
+        } catch (error) {
+            console.log(error.message);
+        }
+    };    
+   
+    // returns one plant/recipe/effect with the specified id
     const getSingleData = async (baseUrl, id) => {
         try {
             const response = await fetch(baseUrl + id);
@@ -65,7 +101,18 @@ const utils = () => {
         }
     }
 
-    return { getMyIp, getPlants, getSinglePlant, getRecipes, getSingleRecipe, getEffects, getSingleEffect };
+    // returns one plant/recipe/effect with the specified name
+    const getByName = async (baseUrl, name) => {
+        try {
+            const response = await fetch(baseUrl + GETBYNAME + name);
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            console.log(error.message);
+        }
+    }    
+
+    return { getMyIp, getPlants, getSinglePlant, getSinglePlantByName, getRecipes, getRecipesByIngredient, getSingleRecipe, getSingleRecipeByName, getEffects, getSingleEffect, getSingleEffectByName };
 }
 
 export default utils;
