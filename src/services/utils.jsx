@@ -10,12 +10,10 @@ const utils = () => {
     const NORTHERNHEMISPHERE = "n/";
     const SOUTHERNHEMISPHERE = "s/";  
     const PLANT_COUNT = "count/countSpecies";
-    // use recipes from public API:
-    //const RECIPES_BASEURL = BASEURL + "apirecipes/";
-    // use recipes from own DB:
     const RECIPES_BASEURL = BASEURL + "recipes/";
     const EFFECTS_BASEURL = BASEURL + "effects/";
     const GETBYNAME = "get-by-name/";
+    const GETBYCOMMONNAME = "get-by-common-name/";
     const GETBYINGREDIENT = "get-by-ingredient/";
 
     // retrieve location for your IP address formatted as JSON
@@ -54,9 +52,14 @@ const utils = () => {
         return getSingleData(PLANTS_BASEURL, id);
     };
 
-    // gets plant with specified name
-    const getSinglePlantByName = async (name) => {
-        return getByName(PLANTS_BASEURL, name);
+    // gets plant with specified latin name
+    const getSinglePlantByName = async (latinName) => {
+        return getByName(PLANTS_BASEURL, latinName);
+    };
+
+    // gets plant with specified localized name
+    const getSinglePlantByLocalName = async (localName) => {
+        return getByCommonName(PLANTS_BASEURL, localName);
     };
 
     const getRecipes = async () => {
@@ -136,9 +139,9 @@ const utils = () => {
 
     // returns one plant/recipe/effect with the specified id
     const getSingleData = async (baseUrl, id) => {
-        try {
+        try {            
             const response = await fetch(baseUrl + id);
-            const json = await response.json();
+            const json = await response.json();            
             return json;
         } catch (error) {
             console.log(error.message);
@@ -156,7 +159,18 @@ const utils = () => {
         }
     }
 
-    return { getMyIp, getPlants, getPlantsPerPage, getBlossomingPlants, getSinglePlant, getSinglePlantByName, getRecipes, getSingleRecipe, getSingleRecipeByName, getEffects, getSingleEffect, getSingleEffectByName, getPlantCount, getRecipesByIngredient };
+    // returns one plant with the specified local name
+    const getByCommonName = async (baseUrl, localName) => {
+        try {
+            const response = await fetch(baseUrl + GETBYCOMMONNAME + localName);
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    return { getMyIp, getPlants, getPlantsPerPage, getBlossomingPlants, getSinglePlant, getSinglePlantByName, getSinglePlantByLocalName, getRecipes, getSingleRecipe, getSingleRecipeByName, getEffects, getSingleEffect, getSingleEffectByName, getPlantCount, getRecipesByIngredient };
 }
 
 export default utils;
