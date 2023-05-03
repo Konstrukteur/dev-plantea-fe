@@ -47,8 +47,8 @@
 }
 
 .recipeImg {
-    width: 20em;
-    height: 20em;   
+    width: 50%;
+    height: 50%;  
 }
 
 .item {
@@ -58,9 +58,4 @@
   padding: 0.6em;
 }
 
-.effectsList {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    padding: 0.6em;
-}
+

@@ -22,7 +22,8 @@ const EffectDetails = () => {
       <div>
         {effect ? (
           <div>
-            <EffectsItem key={effect.id} id={effect.id} name={effect.name} common_name={effect.common_name} binominal_name={effect.binominal_name} habitat={effect.habitat}/>
+            <EffectsItem key={effect.id} id={effect.id} name={effect.name} description={effect.description}  condition_name={effect.condition_name}/>
+            
           </div>
         ) : (
           "loading"
