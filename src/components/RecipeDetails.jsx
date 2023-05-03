@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { NavLink, useOutletContext, useParams } from "react-router-dom";
 import RecipeItem from "./RecipeItem";
 import utils from "../services/utils.jsx";
 
@@ -9,25 +9,52 @@ const RecipeDetails = () => {
     const [recipe, setRecipe] = useState();
     const { getSingleRecipe } = utils();
 
-    const makeIngredientsArray = (recipeData) => {
-        let array = [];
+    // const makeIngredientsArray = (recipeData) => {
+        
+    //     let array = [];
 
+    //     for (const [key, value] of Object.entries(recipeData)) {
+    //         if (key.includes('strIngredient') && value !== '') {
+    //             array.push(value)
+    //         }
 
-        for (const [key, value] of Object.entries(recipeData)) {
-            if (key.includes('strIngredient') && value !== '') {
-                array.push(value)
-            }
+    //     }
+    //     return array
+    // }
+
+    console.log(recipe);
+    const createRecipeIngredients = (recipe) => {
+        recipe["ingredients"] = [];
+
+        for (let i = 1; i <= 20; i++) {
+        const ingredient = recipe[`strIngredient${i}`];
+        const specie = recipe[`specieId${i}`] || "";
+        const measure = recipe[`strMeasure${i}`];
+
+        if (ingredient !== "") {
+            recipe["ingredients"].push({
+            id: id,
+            name: ingredient,
+            specie_id: specie,
+            measure: measure,
+        })
 
         }
-        return array
+        delete recipe[`strIngredient${i}`];
+        delete recipe[`specieId${i}`];
+        delete recipe[`strMeasure${i}`];
+        }
+        console.log(recipe);
+
+        return recipe;
     }
 
     useEffect(() => {
         getSingleRecipe(id).then(recipe => {
-            recipe.ingredientsArray = makeIngredientsArray(recipe);
-
-            setRecipe(recipe);
+            // recipe.ingredientsArray = makeIngredientsArray(recipe);
+            recipe = createRecipeIngredients(recipe);
             setPageTitle(recipe.strMeal);
+            setRecipe(recipe);
 
         });
 
@@ -38,9 +65,14 @@ const RecipeDetails = () => {
             <div>
                 {recipe ? (
                     <div>
-                        <RecipeItem ingredientsArray={recipe.ingredientsArray} key={recipe.idMeal} idMeal={recipe.idMeal} strMealThumb={recipe.strMealThumb} strInstructions={recipe.strInstructions} />
+                        <RecipeItem ingredients={recipe.ingredients} key={recipe.idMeal} idMeal={recipe.idMeal} strMealThumb={recipe.strMealThumb} strInstructions={recipe.strInstructions} />
                     </div>
                 ) : (
+                    "loading"
+                )}
+            </div>
+            <div>
+                {recipe ? recipe.effects.map((effect) => <NavLink to={`/effects/${effect.id}`} >{effect.name}S</NavLink>) : (
                     "loading"
                 )}
             </div>

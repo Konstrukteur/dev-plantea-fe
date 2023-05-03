@@ -11,9 +11,9 @@ const utils = () => {
     const SOUTHERNHEMISPHERE = "s/";  
     const PLANT_COUNT = "count/countSpecies";
     // use recipes from public API:
-    const RECIPES_BASEURL = BASEURL + "apirecipes/";
+    //const RECIPES_BASEURL = BASEURL + "apirecipes/";
     // use recipes from own DB:
-    //const RECIPES_BASEURL = BASEURL + "recipes/";
+    const RECIPES_BASEURL = BASEURL + "recipes/";
     const EFFECTS_BASEURL = BASEURL + "effects/";
     const GETBYNAME = "get-by-name/";
     const GETBYINGREDIENT = "get-by-ingredient/";

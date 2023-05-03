@@ -6,7 +6,7 @@ const PlantItem = ({ species_id, species_name, image_id, filename, common_name, 
     return (
         <div key={species_id} className="item">
             <h4>{species_name}</h4>
-            <div><img  src={image_id ? `https://plantea.aladlabs.net/images/${image_id}/${filename}` : "https://via.placeholder.com/50"} alt="" /></div>
+            <div><img className="plantItemImg" src={image_id ? `https://plantea.aladlabs.net/images/${image_id}/${filename}` : "https://via.placeholder.com/50"} alt="" /></div>
             <h5>{common_name}</h5>
             <h5>{binominal_name}</h5>
             <p>{habitat}</p>
