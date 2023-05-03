@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import ListItem from "./ListItem.jsx";
+import Modal from "./Modal.jsx";
 import Pagination from "./Pagination";
 import utils from "../services/utils.jsx";
 
@@ -11,6 +12,7 @@ const Plants = () => {
   const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [modalVisible, setModalVisible] = useState(true);
   const [plants, setPlants] = useState();
   const { getPlants, getPlantsPerPage, getPlantCount } = utils();
 
@@ -35,6 +37,14 @@ const Plants = () => {
     }
   }, [currentPage, itemsPerPage, selectedHemisphere]);
 
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const hideModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <div className=''>  {
       selectedHemisphere ? <>
@@ -55,7 +65,10 @@ const Plants = () => {
           totalPages={totalPages}
         />
       </> : <div>
-        Please go to <Link to='/location'>Location</Link> and select a hemisphere first to view the relevant plants.
+        <p>No plants available.</p>
+        <Modal show={modalVisible} handleClose={hideModal}>
+          <p>Please go to <Link to='/location'>Location</Link> page and select your preferred hemisphere to view the relevant plants.</p>
+        </Modal>
       </div>
     }
     </div>
