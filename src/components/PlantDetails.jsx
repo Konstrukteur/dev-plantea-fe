@@ -11,11 +11,15 @@ const PlantDetails = () => {
 
   useEffect(() => {    
     getSinglePlant(id).then(plant => {
+        //console.log(plant);
       setPlant(plant);
       setPageTitle(plant.common_name);
     });
 
-  }, [id]);
+
+  }, []);
+
+  console.log("plant", plant)
 
     return (
         <div className=''>

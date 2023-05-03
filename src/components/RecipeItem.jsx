@@ -1,9 +1,11 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "../stylesheets/App.css"
 
-const RecipeItem = ({ idMeal, strMealThumb, ingredientsArray, strInstructions }) => {
-    const myIngr = ingredientsArray;
-    const myIngrList = myIngr.map((str, i) => <li key={i}>{str}</li>);
+const RecipeItem = ({ idMeal, strMealThumb, ingredients, strInstructions }) => {
+    const myIngr = ingredients;
+    console.log(myIngr)
+    const myIngrList = myIngr.map((str, i) =>  str.specie_id != "" ? <li key={i}><NavLink to={"/plants/" + str.specie_id}>{str.name}</NavLink> {str.measure}</li> :  <li key={i}>({str.name} {str.measure})</li>);
     const myInstructions = strInstructions;
     const myInstArray = myInstructions.split('.');
     const myInstList = myInstArray.map((step, index) => {
