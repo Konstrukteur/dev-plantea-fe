@@ -47,8 +47,8 @@
 }
 
 .recipeImg {
-    width: 20em;
-    height: 20em;   
+    width: 50%;
+    height: 50%;  
 }
 
 .item {
@@ -57,3 +57,5 @@
   text-align: left;
   padding: 0.6em;
 }
+
+
