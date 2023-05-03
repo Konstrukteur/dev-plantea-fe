@@ -9,20 +9,8 @@ const RecipeDetails = () => {
     const [recipe, setRecipe] = useState();
     const { getSingleRecipe } = utils();
 
-    // const makeIngredientsArray = (recipeData) => {
-        
-    //     let array = [];
 
-    //     for (const [key, value] of Object.entries(recipeData)) {
-    //         if (key.includes('strIngredient') && value !== '') {
-    //             array.push(value)
-    //         }
-
-    //     }
-    //     return array
-    // }
-
-    console.log(recipe);
+   // console.log(recipe);
     const createRecipeIngredients = (recipe) => {
         recipe["ingredients"] = [];
 
