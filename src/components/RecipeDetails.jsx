@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useOutletContext, useParams } from "react-router-dom";
 import RecipeItem from "./RecipeItem";
 import utils from "../services/utils.jsx";
+import "../stylesheets/App.css"
 
 const RecipeDetails = () => {
     const { pageTitle, setPageTitle } = useOutletContext();
@@ -60,7 +61,7 @@ const RecipeDetails = () => {
                 )}
             </div>
             <div>
-                {recipe ? recipe.effects.map((effect) => <NavLink to={`/effects/${effect.id}`} >{effect.name}S</NavLink>) : (
+                {recipe ? recipe.effects.map((effect) => <NavLink to={`/effects/${effect.id}`} ><li className="effectsList">{effect.name}</li></NavLink>) : (
                     "loading"
                 )}
             </div>

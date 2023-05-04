@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import Pagination from "./Pagination.jsx";
-import ListItem from "./ListItem.jsx";
+import EffectsList from "./EffectsList.jsx";
 import utils from "../services/utils.jsx";
 
 const Effects = () => {
@@ -27,8 +27,8 @@ const Effects = () => {
         {effects
           ? effects.map((effect) => (
             <div>
-              <ListItem key={effect.id} id={effect.id} title={effect.name} />
-              <div className="item">{effect.description}</div>
+              <EffectsList key={effect.id} id={effect.id} name={effect.name}/>
+              <div className='item'>{effect.description}</div>
             </div>
           ))
           : "loading..."}
