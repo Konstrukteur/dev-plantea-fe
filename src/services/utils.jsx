@@ -4,14 +4,17 @@ const utils = () => {
     // https://ipapi.co/api/?javascript#location-of-clients-ip 
     const IP_URL = "https://ipapi.co/json/";
     const BASEURL = "https://plantea.aladlabs.net/api/v1/";
-    const PLANTS_BASEURL = BASEURL + "species/";
+    const PLANTS = "species/";
+    const RECIPES = "recipes/";
+    const EFFECTS = "effects/";    
     const HARVEST = "harvesting/";
     const BLOSSOM = "blossoming/";
     const NORTHERNHEMISPHERE = "n/";
     const SOUTHERNHEMISPHERE = "s/";  
     const PLANT_COUNT = "count/countSpecies";
-    const RECIPES_BASEURL = BASEURL + "recipes/";
-    const EFFECTS_BASEURL = BASEURL + "effects/";
+    const PLANTS_BASEURL = BASEURL + PLANTS;
+    const RECIPES_BASEURL = BASEURL + RECIPES;
+    const EFFECTS_BASEURL = BASEURL + EFFECTS;
     const GETBYNAME = "get-by-name/";
     const GETBYCOMMONNAME = "get-by-common-name/";
     const GETBYINGREDIENT = "get-by-ingredient/";
@@ -112,6 +115,28 @@ const utils = () => {
         }
     };
 
+    const getPlantsforEffect = async(effectId) => {
+        // URL: /api/v1/effects/:id/species
+        try {
+            const response = await fetch(EFFECTS_BASEURL + effectId + PLANTS);
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const getRecipesForPlant = async(plantID) => {
+        // URL: /api/v1/species/5/recipes
+        try {
+            const response = await fetch(PLANTS_BASEURL + plantID + RECIPES);
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     // -------------------- private helper functions -------------------------
 
     // returns URL snippet for selected hemisphere ("north or south")
@@ -170,7 +195,7 @@ const utils = () => {
         }
     }
 
-    return { getMyIp, getPlants, getPlantsPerPage, getBlossomingPlants, getSinglePlant, getSinglePlantByName, getSinglePlantByLocalName, getRecipes, getSingleRecipe, getSingleRecipeByName, getEffects, getSingleEffect, getSingleEffectByName, getPlantCount, getRecipesByIngredient };
+    return { getMyIp, getPlants, getPlantsPerPage, getBlossomingPlants, getSinglePlant, getSinglePlantByName, getSinglePlantByLocalName, getRecipes, getSingleRecipe, getSingleRecipeByName, getEffects, getSingleEffect, getSingleEffectByName, getPlantCount, getRecipesByIngredient, getPlantsforEffect, getRecipesForPlant };
 }
 
 export default utils;
