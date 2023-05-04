@@ -43,6 +43,7 @@ const Plants = () => {
 
   const hideModal = () => {
     setModalVisible(false);
+    setSelectedHemisphere("north");
   };
 
   return (
@@ -67,7 +68,8 @@ const Plants = () => {
       </> : <div>
         <p>No plants available.</p>
         <Modal show={modalVisible} handleClose={hideModal}>
-          <p>Please go to <Link to='/location'>Location</Link> page and select your preferred hemisphere to view the relevant plants.</p>
+          <p>Please note that your region is pre-set to <em>northern</em> hemisphere.</p>
+          <p>Go to <Link to='/location'>Location</Link> page to change.</p>
         </Modal>
       </div>
     }
