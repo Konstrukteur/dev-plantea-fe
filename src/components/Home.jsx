@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link,  useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import Modal from "./Modal.jsx";
 import utils from "../services/utils.jsx";
 
@@ -24,12 +24,12 @@ const Home = () => {
         setPlant(randPlant);
         //console.log(randPlant)
       })
-    }
+    }  
   }, [selectedHemisphere]);
 
   useEffect(() => {
     if (selectedHemisphere && plant) {
-      console.log("useEffect: " + plant.common_name)
+      console.log("Home - useEffect: " + plant.common_name)
 
       getRecipesByIngredient(plant.common_name).then(recipes => setRecipes(recipes))
     }
@@ -41,6 +41,7 @@ const Home = () => {
 
   const hideModal = () => {
     setModalVisible(false);
+    setSelectedHemisphere("north");
   };
 
   return (
@@ -81,11 +82,11 @@ const Home = () => {
         <div>
           <p>No plants available.</p>
           <Modal show={modalVisible} handleClose={hideModal}>
-            <p>Please go to <Link to='/location'>Location</Link> page and select your preferred hemisphere to view the relevant plants.</p>
+            <p>Please note that your region is pre-set to <em>northern</em> hemisphere.</p>
+            <p>Go to <Link to='/location'>Location</Link> page to change.</p>
           </Modal>
         </div>
       )
-
     }
     </>);
 };
