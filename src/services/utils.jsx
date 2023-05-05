@@ -117,8 +117,9 @@ const utils = () => {
     const getPlantsforEffect = async(effectId) => {
         // URL: /api/v1/effects/:id/species
         try {
-            const response = await fetch(EFFECTS_BASEURL + effectId + PLANTS);
+            const response = await fetch( EFFECTS_BASEURL + effectId + "/" + PLANTS);
             const json = await response.json();
+            console.log(json);
             return json;
         } catch (error) {
             console.log(error.message);
@@ -128,7 +129,7 @@ const utils = () => {
     const getRecipesForPlant = async(plantID) => {
         // URL: /api/v1/species/5/recipes
         try {
-            const response = await fetch(PLANTS_BASEURL + plantID + RECIPES);
+            const response = await fetch(PLANTS_BASEURL + plantID + "/" + RECIPES);
             const json = await response.json();
             return json;
         } catch (error) {

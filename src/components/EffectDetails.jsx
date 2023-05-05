@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { NavLink, useOutletContext, useParams } from "react-router-dom";
 import EffectsItem from "./EffectsItem";
+import EffectSpecies from "./EffectSpecies";
 import utils from "../services/utils.jsx";
 
 const EffectDetails = () => {
@@ -8,6 +9,8 @@ const EffectDetails = () => {
   const {id } = useParams();
   const [effect, setEffect] = useState();
   const { getSingleEffect } = utils();
+
+  
 
   useEffect(() => {   
     setPageTitle("Effect Details");
@@ -22,12 +25,12 @@ const EffectDetails = () => {
       <div>
         {effect ? (
           <div>
-            <EffectsItem key={effect.id} id={effect.id} name={effect.name} description={effect.description}  condition_name={effect.condition_name}/>
-            
+            <EffectsItem key={effect.id} id={effect.id} description={effect.description} />
           </div>
         ) : (
           "loading"
         )}
+        { effect && <EffectSpecies effect={effect} />}
       </div>
     </div>
   );
