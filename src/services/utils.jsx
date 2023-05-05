@@ -108,8 +108,7 @@ const utils = () => {
         try {
             const response = await fetch(RECIPES_BASEURL + GETBYINGREDIENT + ingredient);
             const json = await response.json();
-            const recipes = json.map(element => element[0])
-            return recipes;
+            return json;
         } catch (error) {
             console.log(error.message);
         }
