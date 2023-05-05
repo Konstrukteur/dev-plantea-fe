@@ -61,7 +61,7 @@ const RecipeDetails = () => {
                 )}
             </div>
             <div>
-                {recipe ? recipe.effects.map((effect) => <NavLink to={`/effects/${effect.id}`} ><li className="effectsList">{effect.name}</li></NavLink>) : (
+                {recipe ? recipe.effects.map((effect) => <NavLink to={`/effects/${effect.id}`} ><li className="item">{effect.name}</li></NavLink>) : (
                     "loading"
                 )}
             </div>
