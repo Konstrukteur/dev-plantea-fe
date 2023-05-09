@@ -1,12 +1,10 @@
 import "../stylesheets/App.css"
 
 
-const EffectsItem = ({id, name, description, condition_name}) => {
+const EffectsItem = ({id, description}) => {
     return (
         <div key={id} className="item">
-        <h4>{name}</h4>
         <p>{description}</p>
-        <p>{condition_name}</p>
         </div>
     );
 };

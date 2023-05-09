@@ -1,41 +1,17 @@
 import { NavLink } from "react-router-dom";
+import "../stylesheets/App.css";
+const PlantTile = ({ plant, specie_name }) => {
 
-const PlantTile = ({ plant }) => {
+  plant && console.log(plant)
+
   return (
-    <div className='' key={plant.id}>
+    <div className='item' key={plant.specieId}>
       <div>
-        <NavLink to={`/plants/${plant.id}`}>
-          <img src={plant.image_1 && `https://${plant.image_1}`} />
+        <NavLink to={`/plants/${plant.specieId}`}>
+            <h5>{specie_name}</h5>
+          <img className="plantItemImg" src={plant && `https://plantea.aladlabs.net/images/${plant.image_id}/${plant.filename}`} />
         </NavLink>
       </div>
-      <table>
-        <tbody>
-          <tr>
-            <td>Common Name</td>
-            <td>{plant.common_name}</td>
-          </tr>
-          <tr>
-            <td>Other Name</td>
-            <td>{plant.other_name}</td>
-          </tr>
-          <tr>
-            <td>Scientific Name</td>
-            <td>{plant.binominal_name}</td>
-          </tr>
-          <tr>
-            <td>Cycle</td>
-            <td>{plant.cycle}</td>
-          </tr>
-          <tr>
-            <td>Sunlight</td>
-            <td>{plant.sunlight}</td>
-          </tr>
-          <tr>
-            <td>Watering</td>
-            <td>{plant.watering}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   );
 };
