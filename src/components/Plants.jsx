@@ -27,7 +27,9 @@ const Plants = () => {
 
     if (selectedHemisphere) {
       // --> set number of pages depending on total items count and items per page
-      getPlants(selectedHemisphere).then(plants => setTotalPages(Math.ceil(plants.length / itemsPerPage)));
+      getPlants(selectedHemisphere).then(plants =>  console.log(plants)
+        // setTotalPages(Math.ceil(plants.length / itemsPerPage))  
+         );
       // get plant count from API returns total number of plants in DB - NOT specific for month and region
       // todo in backend: make available in API
       //getPlantCount().then(count => setTotalPages(Math.ceil(count / itemsPerPage)));     
